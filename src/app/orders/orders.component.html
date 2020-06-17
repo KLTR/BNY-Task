@@ -1,0 +1,32 @@
+<div class="customers view indent">
+    <div class="container">
+        <header>
+            <h3>
+                <span class="glyphicon glyphicon-folder-open"></span> Orders
+            </h3>
+        </header>
+        <br />
+      <div class="row">
+        <div class="col-md-10">
+          <div class="navbar">
+            <ul class="nav navbar-nav">
+              <li class="toolbar-item">
+                <a routerLink="/orders/list" [class.active]="value === 'list'">
+                  <span class="glyphicon glyphicon-align-justify"></span> List
+                </a>
+              </li>
+              <li class="toolbar-item">
+                <a routerLink="/orders/add">
+                  <span class="glyphicon glyphicon-plus"></span> New Order
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+</div>
