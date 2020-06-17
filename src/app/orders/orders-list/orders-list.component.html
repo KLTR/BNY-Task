@@ -2,7 +2,10 @@
   <div *ngIf="customers">
 
     <div class="row" *ngFor="let customer of customers;trackBy:trackbyService.customer">
-      <h4>{{ customer.firstName | capitalize }} {{ customer.lastName | capitalize }}</h4>
+      <div class="flex-row">
+        <h4>{{ customer.firstName | capitalize }} {{ customer.lastName | capitalize }}</h4>
+        <button class="btn btn-light btn-sm" (click)="router.navigate(['/orders/add', customer.id])" >Add Order</button>
+      </div>
       <br />
       <table *ngIf="customer.orders && customer.orders.length" class="table table-striped table-hover orders-table">
         <tr *ngFor="let order of customer.orders;trackBy:trackbyService.order">

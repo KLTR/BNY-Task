@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ICustomer, IPagedResults} from '../../shared/interfaces';
 import {DataService} from '../../core/services/data.service';
 import {TrackByService} from '../../core/services/trackby.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'cm-orders-list',
@@ -16,7 +17,7 @@ export class OrdersListComponent implements OnInit {
 
 
 
-  constructor(private dataService: DataService, public trackbyService: TrackByService) { }
+  constructor(private dataService: DataService, public trackbyService: TrackByService, private router: Router) { }
 
   ngOnInit() {
     this.getCustomersPage(1);

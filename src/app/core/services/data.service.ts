@@ -1,138 +1,141 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {map, catchError} from 'rxjs/operators';
 
 import {ICustomer, IOrder, IState, IPagedResults, IApiResponse, IOrderItem} from '../../shared/interfaces';
-import { UtilitiesService } from './utilities.service';
+import {UtilitiesService} from './utilities.service';
 
 @Injectable()
 export class DataService {
-    baseUrl = this.utilitiesService.getApiUrl();
-    customersBaseUrl = this.baseUrl + '/api/customers';
-    ordersBaseUrl = this.baseUrl + '/api/orders';
-    orders: IOrder[];
-    states: IState[];
+  baseUrl = this.utilitiesService.getApiUrl();
+  customersBaseUrl = this.baseUrl + '/api/customers';
+  ordersBaseUrl = this.baseUrl + '/api/orders';
+  orders: IOrder[];
+  states: IState[];
 
-    constructor(private http: HttpClient, private utilitiesService: UtilitiesService) {  }
+  constructor(private http: HttpClient, private utilitiesService: UtilitiesService) {
+  }
 
-    getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
-        return this.http.get<ICustomer[]>(
-            `${this.customersBaseUrl}/page/${page}/${pageSize}`,
-            { observe: 'response' })
-            .pipe(
-                map(res => {
-                    const totalRecords = +res.headers.get('X-InlineCount');
-                    const customers = res.body as ICustomer[];
-                    this.calculateCustomersOrderTotal(customers);
-                    return {
-                        results: customers,
-                        totalRecords: totalRecords
-                    };
-                }),
-                catchError(this.handleError)
-            );
-    }
-
-    getCustomers(): Observable<ICustomer[]> {
-        return this.http.get<ICustomer[]>(this.customersBaseUrl)
-            .pipe(
-                map(customers => {
-                    this.calculateCustomersOrderTotal(customers);
-                    return customers;
-                }),
-                catchError(this.handleError)
-            );
-    }
-
-    getCustomer(id: number): Observable<ICustomer> {
-        return this.http.get<ICustomer>(this.customersBaseUrl + '/' + id)
-            .pipe(
-                map(customer => {
-                    this.calculateCustomersOrderTotal([customer]);
-                    return customer;
-                }),
-                catchError(this.handleError)
-            );
-    }
-
-    insertCustomer(customer: ICustomer): Observable<ICustomer> {
-        return this.http.post<ICustomer>(this.customersBaseUrl, customer)
-            .pipe(catchError(this.handleError));
-    }
-
-    updateCustomer(customer: ICustomer): Observable<boolean> {
-        return this.http.put<IApiResponse>(this.customersBaseUrl + '/' + customer.id, customer)
-            .pipe(
-                map(res => res.status),
-                catchError(this.handleError)
-            );
-    }
-
-    deleteCustomer(id: number): Observable<boolean> {
-        return this.http.delete<IApiResponse>(this.customersBaseUrl + '/' + id)
-            .pipe(
-                map(res => res.status),
-                catchError(this.handleError)
-            );
-    }
-
-    getStates(): Observable<IState[]> {
-        return this.http.get<IState[]>(this.baseUrl + '/api/states')
-            .pipe(catchError(this.handleError));
-    }
-
-    private handleError(error: HttpErrorResponse) {
-        console.error('server error:', error);
-        if (error.error instanceof Error) {
-            const errMessage = error.error.message;
-            return Observable.throw(errMessage);
-            // Use the following instead if using lite-server
-            // return Observable.throw(err.text() || 'backend server error');
-        }
-        return Observable.throw(error || 'Node.js server error');
-    }
-
-    calculateCustomersOrderTotal(customers: ICustomer[]) {
-        for (const customer of customers) {
-            if (customer && customer.orders) {
-                let total = 0;
-                for (const order of customer.orders) {
-                    total += order.itemCost;
-                }
-                customer.orderTotal = total;
-            }
-        }
-    }
-
-  getOrders(): Observable<IOrder[]> {
-    return this.http.get<IOrder[]>(this.ordersBaseUrl)
+  getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
+    return this.http.get<ICustomer[]>(
+      `${this.customersBaseUrl}/page/${page}/${pageSize}`,
+      {observe: 'response'})
       .pipe(
-        map(orders => {
-          console.log(orders);
-          return orders;
+        map(res => {
+          const totalRecords = +res.headers.get('X-InlineCount');
+          const customers = res.body as ICustomer[];
+          this.calculateCustomersOrderTotal(customers);
+          return {
+            results: customers,
+            totalRecords: totalRecords
+          };
         }),
         catchError(this.handleError)
       );
   }
-  inserOrder(customer: ICustomer, order: IOrderItem): Observable<ICustomer> {
-      const orderWithCustomer = {...order, customer: customer}
+
+  getCustomers(): Observable<ICustomer[]> {
+    return this.http.get<ICustomer[]>(this.customersBaseUrl)
+      .pipe(
+        map(customers => {
+          this.calculateCustomersOrderTotal(customers);
+          return customers;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  getCustomer(id: number): Observable<ICustomer> {
+    return this.http.get<ICustomer>(this.customersBaseUrl + '/' + id)
+      .pipe(
+        map(customer => {
+          this.calculateCustomersOrderTotal([customer]);
+          return customer;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  insertCustomer(customer: ICustomer): Observable<ICustomer> {
     return this.http.post<ICustomer>(this.customersBaseUrl, customer)
       .pipe(catchError(this.handleError));
   }
-    // Not using now but leaving since they show how to create
-    // and work with custom observables
 
-    // Would need following import added:
-    // import { Observer } from 'rxjs';
+  updateCustomer(customer: ICustomer): Observable<boolean> {
+    return this.http.put<IApiResponse>(this.customersBaseUrl + '/' + customer.id, customer)
+      .pipe(
+        map(res => res.status),
+        catchError(this.handleError)
+      );
+  }
 
-    // createObservable(data: any): Observable<any> {
-    //     return Observable.create((observer: Observer<any>) => {
-    //         observer.next(data);
-    //         observer.complete();
-    //     });
-    // }
+  deleteCustomer(id: number): Observable<boolean> {
+    return this.http.delete<IApiResponse>(this.customersBaseUrl + '/' + id)
+      .pipe(
+        map(res => res.status),
+        catchError(this.handleError)
+      );
+  }
+
+  getStates(): Observable<IState[]> {
+    return this.http.get<IState[]>(this.baseUrl + '/api/states')
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('server error:', error);
+    if (error.error instanceof Error) {
+      const errMessage = error.error.message;
+      return Observable.throw(errMessage);
+      // Use the following instead if using lite-server
+      // return Observable.throw(err.text() || 'backend server error');
+    }
+    return Observable.throw(error || 'Node.js server error');
+  }
+
+  calculateCustomersOrderTotal(customers: ICustomer[]) {
+    for (const customer of customers) {
+      if (customer && customer.orders) {
+        let total = 0;
+        for (const order of customer.orders) {
+          total += order.itemCost;
+        }
+        customer.orderTotal = total;
+      }
+    }
+  }
+
+  // getOrders(): Observable<IOrder[]> {
+  //   return this.http.get<IOrder[]>(this.ordersBaseUrl)
+  //     .pipe(
+  //       map(orders => {
+  //         console.log(orders);
+  //         return orders;
+  //       }),
+  //       catchError(this.handleError)
+  //     );
+  // }
+
+  inserOrder(customerId: number, order: IOrder[]): Observable<IOrder> {
+    const orderWithCustomer = {order: order, customerId: customerId};
+    return this.http.post<IOrder>(this.ordersBaseUrl, orderWithCustomer)
+      .pipe(catchError(this.handleError));
+  }
+
+  // Not using now but leaving since they show how to create
+  // and work with custom observables
+
+  // Would need following import added:
+  // import { Observer } from 'rxjs';
+
+  // createObservable(data: any): Observable<any> {
+  //     return Observable.create((observer: Observer<any>) => {
+  //         observer.next(data);
+  //         observer.complete();
+  //     });
+  // }
 
 
 }
