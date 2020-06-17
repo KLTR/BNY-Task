@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
+import {ICustomer, IOrder, IState, IPagedResults, IApiResponse, IOrderItem} from '../../shared/interfaces';
 import { UtilitiesService } from './utilities.service';
 
 @Injectable()
@@ -106,6 +106,21 @@ export class DataService {
         }
     }
 
+  getOrders(): Observable<IOrder[]> {
+    return this.http.get<IOrder[]>(this.ordersBaseUrl)
+      .pipe(
+        map(orders => {
+          console.log(orders);
+          return orders;
+        }),
+        catchError(this.handleError)
+      );
+  }
+  inserOrder(customer: ICustomer, order: IOrderItem): Observable<ICustomer> {
+      const orderWithCustomer = {...order, customer: customer}
+    return this.http.post<ICustomer>(this.customersBaseUrl, customer)
+      .pipe(catchError(this.handleError));
+  }
     // Not using now but leaving since they show how to create
     // and work with custom observables
 
@@ -118,6 +133,6 @@ export class DataService {
     //         observer.complete();
     //     });
     // }
-    
+
 
 }
