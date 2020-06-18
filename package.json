@@ -12,7 +12,7 @@
     "cypress": "concurrently \"npm start\" \"cypress open\"",
     "cypress:headless": "concurrently \"npm start\" \"cypress run\"",
     "playground": "angular-playground",
-    "postinstall": "ng build --prod"
+    "postinstall": "ng build --prod "
   },
   "dependencies": {
     "@angular/animations": "~9.1.0",
@@ -58,5 +58,8 @@
   "optionalDependencies": {
     "cypress": "^4.3.0",
     "@bahmutov/add-typescript-to-cypress": "^2.1.2"
+  },
+  "engines": {
+    "node": "12.14.1"
   }
 }
