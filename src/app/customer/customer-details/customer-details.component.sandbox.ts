@@ -1,7 +1,7 @@
 import { sandboxOf } from 'angular-playground';
 import { SharedModule } from '../../shared/shared.module';
 import { CoreModule } from '../../core/core.module';
-import { DataService } from '../../core/services/data.service';
+import { DataService } from '../../core/services/data-service/data.service';
 import { CustomerDetailsComponent } from './customer-details.component';
 import { MockDataService, MockActivatedRoute, getActivatedRouteWithParent } from '../../shared/mocks';
 import { ActivatedRoute } from '@angular/router';

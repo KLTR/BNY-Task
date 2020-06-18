@@ -2,7 +2,7 @@ import { Component, OnInit, ComponentRef, ViewChild, ViewContainerRef, Component
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { ICustomer } from '../../shared/interfaces';
-import { DataService } from '../../core/services/data.service';
+import { DataService } from '../../core/services/data-service/data.service';
 
 @Component({
   selector: 'cm-customer-details',
@@ -15,10 +15,10 @@ export class CustomerDetailsComponent implements OnInit {
   mapEnabled: boolean;
   mapComponentRef: ComponentRef<any>;
 
-  @ViewChild('mapsContainer', { read: ViewContainerRef }) 
+  @ViewChild('mapsContainer', { read: ViewContainerRef })
   private mapsViewContainerRef: ViewContainerRef;
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
     private dataService: DataService,
     private componentFactoryResolver: ComponentFactoryResolver) { }
 

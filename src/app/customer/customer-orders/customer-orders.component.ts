@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
-import { DataService } from '../../core/services/data.service';
+import { DataService } from '../../core/services/data-service/data.service';
 import { ICustomer, IOrder, IOrderItem } from '../../shared/interfaces';
 
 @Component({

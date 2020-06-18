@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '',
     component: OrdersComponent,
     children: [
-      {path: '', redirectTo: 'list'},
+      {path: '', redirectTo: 'list', pathMatch: 'full'},
       {path: 'list', component: OrdersListComponent},
       {
         path: 'add/:id',

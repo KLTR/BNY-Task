@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ICustomer, IOrder, IOrderItem, IState} from '../../shared/interfaces';
-import {DataService} from '../../core/services/data.service';
+import {DataService} from '../../core/services/data-service/data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GrowlerMessageType, GrowlerService} from '../../core/growler/growler.service';
 import {IModalContent, ModalService} from '../../core/modal/modal.service';
@@ -65,7 +65,7 @@ export class OrderAddComponent implements OnInit, OnDestroy {
 
   submit() {
     this.dataService.inserOrder(this.selectedCustomerId, this.orders)
-      .subscribe((insertedOrder: IOrder) => {
+      .subscribe((insertedOrder: IOrder[]) => {
           if (insertedOrder) {
             // Mark form as pristine so that CanDeactivateGuard won't prompt before navigation
             this.orderForm.form.markAsPristine();

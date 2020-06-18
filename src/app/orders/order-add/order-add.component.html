@@ -6,7 +6,7 @@
               [(ngModel)]="selectedCustomerId"
               name="customer"
               required>
-        <option [ngValue]="null" disabled>Select Customer</option>
+        <option [ngValue]="0" disabled>Select Customer</option>
         <option *ngFor="let customer of customers"
                 [ngValue]="customer.id">{{customer.firstName}} {{customer.lastName}}</option>
       </select>
@@ -15,7 +15,7 @@
       <div class="row">
         <div class="form-group col-md-6">
           <label>Product Name</label>
-          <input type="text" class="form-control" name="productName" required [(ngModel)]="order.productName"
+          <input  type="text" class="form-control prodName" name="productName" required [(ngModel)]="order.productName"
                  #productName="ngModel">
           <div class="alert alert-danger" [hidden]="productName.pristine || productName.valid">Product Name is required
           </div>
@@ -23,7 +23,7 @@
         <div class="form-group col-md-6">
           <label>Product Price</label>
           <input type="text"
-                 class="form-control"
+                 class="form-control itemCost"
                  name="itemCost"
                  ppOnlyNumber="true"
                  currencyMask

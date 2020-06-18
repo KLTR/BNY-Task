@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ICustomer, IPagedResults} from '../../shared/interfaces';
-import {DataService} from '../../core/services/data.service';
+import {DataService} from '../../core/services/data-service/data.service';
 import {TrackByService} from '../../core/services/trackby.service';
 import {Router} from '@angular/router';
 

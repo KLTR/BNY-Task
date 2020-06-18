@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {NgForm} from '@angular/forms';
 
-import {DataService} from '../../core/services/data.service';
+import {DataService} from '../../core/services/data-service/data.service';
 import {ModalService, IModalContent} from '../../core/modal/modal.service';
 import {ICustomer, IState} from '../../shared/interfaces';
 import {GrowlerService, GrowlerMessageType} from '../../core/growler/growler.service';

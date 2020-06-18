@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, 
+import { Component, OnInit, ViewChild,
   ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 
-import { DataService } from '../core/services/data.service';
+import { DataService } from '../core/services/data-service/data.service';
 import { ICustomer, IPagedResults } from '../shared/interfaces';
 import { FilterService } from '../core/services/filter.service';
 import { LoggerService } from '../core/services/logger.service';
@@ -32,7 +32,7 @@ export class CustomersComponent implements OnInit {
     this.updateMapComponentDataPoints();
   }
 
-  @ViewChild('mapsContainer', { read: ViewContainerRef }) 
+  @ViewChild('mapsContainer', { read: ViewContainerRef })
   private mapsViewContainerRef: ViewContainerRef;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,

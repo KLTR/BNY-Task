@@ -7,7 +7,7 @@ import { GrowlerModule } from './growler/growler.module';
 import { ModalModule } from './modal/modal.module';
 import { OverlayModule } from './overlay/overlay.module';
 
-import { DataService } from './services/data.service';
+import { DataService } from './services/data-service/data.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterService } from './services/filter.service';
 import { SorterService } from './services/sorter.service';

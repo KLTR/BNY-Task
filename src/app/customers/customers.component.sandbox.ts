@@ -7,7 +7,7 @@ import { CustomersCardComponent } from './customers-card/customers-card.componen
 import { CustomersGridComponent } from './customers-grid/customers-grid.component';
 import { CoreModule } from '../core/core.module';
 import { customers, MockDataService } from '../shared/mocks';
-import { DataService } from '../core/services/data.service';
+import { DataService } from '../core/services/data-service/data.service';
 
 const sandboxConfig = {
   imports: [ SharedModule, CoreModule, RouterTestingModule ],
