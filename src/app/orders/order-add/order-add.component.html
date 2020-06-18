@@ -46,7 +46,7 @@
       </ng-container>
       <div class="pull-right">
         <button class="btn btn-default" (click)="cancel($event)">Cancel</button>&nbsp;
-        <button class="btn btn-primary" (click)="addItem()" [disabled]="orderForm.pristine || !orderForm.valid">Add Item
+        <button class="btn btn-primary add-btn" (click)="addItem()" [disabled]="orderForm.pristine || !orderForm.valid">Add Item
         </button>
         <button type="submit" class="btn btn-success"
                 [disabled]="orders.length === 0">Insert List
