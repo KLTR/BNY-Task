@@ -15,12 +15,6 @@ const routes: Routes = [
       {path: '', redirectTo: 'list'},
       {path: 'list', component: OrdersListComponent},
       {
-        path: 'add',
-        component: OrderAddComponent,
-        canActivate: [CanActivateGuard],
-        canDeactivate: [CanDeactivateGuard]
-      },
-      {
         path: 'add/:id',
         component: OrderAddComponent,
         canActivate: [CanActivateGuard],

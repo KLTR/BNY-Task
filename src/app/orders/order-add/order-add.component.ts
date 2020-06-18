@@ -6,7 +6,6 @@ import {GrowlerMessageType, GrowlerService} from '../../core/growler/growler.ser
 import {IModalContent, ModalService} from '../../core/modal/modal.service';
 import {NgForm} from '@angular/forms';
 import {LoggerService} from '../../core/services/logger.service';
-import Order = jasmine.Order;
 import {TrackByService} from '../../core/services/trackby.service';
 
 @Component({

@@ -17,7 +17,7 @@ export class OrdersListComponent implements OnInit {
 
 
 
-  constructor(private dataService: DataService, public trackbyService: TrackByService, private router: Router) { }
+  constructor(private dataService: DataService, public trackbyService: TrackByService, public router: Router) { }
 
   ngOnInit() {
     this.getCustomersPage(1);
