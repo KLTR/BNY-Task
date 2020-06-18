@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node app/server.js",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -12,7 +12,7 @@
     "cypress": "concurrently \"npm start\" \"cypress open\"",
     "cypress:headless": "concurrently \"npm start\" \"cypress run\"",
     "playground": "angular-playground",
-    "postinstall": "ng build --prod "
+    "postinstall": "ng build --prod"
   },
   "dependencies": {
     "@angular/animations": "~9.1.0",
