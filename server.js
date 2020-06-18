@@ -1,5 +1,5 @@
-"use strict";
-var express = require('express'),
+  "use strict";
+  var express = require('express'),
   bodyParser = require('body-parser'),
   fs = require('fs'),
   app = express(),
@@ -8,14 +8,8 @@ var express = require('express'),
   inContainer = process.env.CONTAINER,
   inAzure = process.env.WEBSITE_RESOURCE_GROUP,
   port = process.env.PORT || 8080;
-const orders = [];
-customers.forEach(customer => {
-  if (customer.orders) {
-    customer.orders.forEach(order => {
-      orders.push(order);
-    })
-  }
-});
+  const orders = [];
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -54,21 +48,7 @@ app.get('/api/customers', (req, res) => {
   res.json(customers);
 });
 
-app.get('/api/orders', function (req, res) {
-  res.json(orders)
-});
 
-app.post('/api/orders', function (req, res) {
-  let body = req.body;
-  let customerId = body.customerId;
-  let postedOrdersList = body.order;
-  for (let cust of customers) {
-    if (cust.id === customerId) {
-      cust.orders = cust.orders ? [...cust.orders, ...postedOrdersList] : postedOrdersList;
-      res.json(postedOrdersList);
-    }
-  }
-});
 
 app.get('/api/customers/:id', (req, res) => {
   let customerId = +req.params.id;
@@ -126,6 +106,17 @@ app.delete('/api/customers/:id', function (req, res) {
   res.json({status: true});
 });
 
+app.post('/api/orders', function (req, res) {
+  let body = req.body;
+  let customerId = body.customerId;
+  let postedOrdersList = body.order;
+  for (let cust of customers) {
+    if (cust.id === customerId) {
+      cust.orders = cust.orders ? [...cust.orders, ...postedOrdersList] : postedOrdersList;
+      res.json(postedOrdersList);
+    }
+  }
+});
 
 app.get('/api/orders/:id', function (req, res) {
   let customerId = +req.params.id;

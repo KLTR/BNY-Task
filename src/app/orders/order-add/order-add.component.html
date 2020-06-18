@@ -8,7 +8,7 @@
               required>
         <option [ngValue]="0" disabled>Select Customer</option>
         <option *ngFor="let customer of customers"
-                [ngValue]="customer.id">{{customer.firstName}} {{customer.lastName}}</option>
+                [ngValue]="customer.id">{{customer.firstName | capitalize}} {{customer.lastName | capitalize}}</option>
       </select>
     </div>
     <ng-container *ngIf="selectedCustomerId">
