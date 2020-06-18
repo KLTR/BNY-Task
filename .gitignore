@@ -7,15 +7,6 @@ sandboxes.ts
 .idea
 .vs
 
-# Build Generated Files
-src/app/**/*.js
-src/app/**/*.js.map
-
 # Ignore any Webpack generated files
-
 cypress/videos/
 cypress/screenshots/
-
-
-
-#
