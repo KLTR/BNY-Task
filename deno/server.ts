@@ -3,7 +3,7 @@ import { Application } from 'https://deno.land/x/oak/mod.ts';
 import { join } from 'https://deno.land/std/path/mod.ts';
 import { exists } from 'https://deno.land/std/fs/mod.ts';
 import { oakCors } from 'https://deno.land/x/cors/mod.ts';
-import router from './routes.ts';
+import router from './routes.js';
 
 const port = 8080,
       distFolder = join(`${Deno.cwd()}`, '../dist'),

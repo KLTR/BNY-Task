@@ -1,5 +1,5 @@
 import { Router } from 'https://deno.land/x/oak/mod.ts';
-import loadFile from './loadfile.ts';
+import loadFile from './loadfile.js';
 
 const   customers   = JSON.parse(loadFile('../data/customers.json')),
         states      = JSON.parse(loadFile('../data/states.json')),
@@ -8,7 +8,7 @@ const   customers   = JSON.parse(loadFile('../data/customers.json')),
 router.get<{skip: string, top: string}>('/api/customers/page/:skip/:top', (ctx) => {
     const topVal = +ctx.params.top,
           skipVal = +ctx.params.skip,
-          skip = (isNaN(skipVal)) ? 0 : skipVal;  
+          skip = (isNaN(skipVal)) ? 0 : skipVal;
     let top = (isNaN(topVal)) ? 10 : skip + (topVal);
 
     if (top > customers.length) {
@@ -36,7 +36,7 @@ router.get<{id: string}>('/api/customers/:id', (ctx) => {
            selectedCustomer = customer;
            break;
         }
-    }  
+    }
     ctx.response.body = selectedCustomer;
 });
 
@@ -55,7 +55,7 @@ router.put<{id: string}>('/api/customers/:id', async (ctx) => {
     let id = +ctx.params.id;
     let status = false;
 
-    //Ensure state name is in sync with state abbreviation 
+    //Ensure state name is in sync with state abbreviation
     const filteredStates = states.filter((state: any) => state.abbreviation === putCustomer.state.abbreviation);
     if (filteredStates && filteredStates.length) {
         putCustomer.state.name = filteredStates[0].name;
@@ -79,7 +79,7 @@ router.delete<{id: string}>('/api/customers/:id', (ctx) => {
            customers.splice(i,1);
            break;
         }
-    }  
+    }
     ctx.response.body = { status: true };
 });
 
