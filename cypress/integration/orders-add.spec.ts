@@ -17,14 +17,14 @@ describe('Add Order', () => {
   });
 
   it('should display product name input and product price input', () => {
-    cy.get('select').select('ted james');
+    cy.get('select').select('Ted James');
     cy.get('[name="productName"]').should('be.visible');
     cy.get('[name="itemCost"]').should('be.visible');
   });
 
 
   it('should add one order to the list', () => {
-    cy.get('select').select('ted james');
+    cy.get('select').select('Ted James');
     cy.get('[name="productName"]').type('Test Item');
     cy.get('[name="itemCost"]').type('125.25');
     cy.get('.add-btn').click();
@@ -34,7 +34,7 @@ describe('Add Order', () => {
 
 
   it('should insert order', () => {
-    cy.get('select').select('ted james');
+    cy.get('select').select('Ted James');
     cy.get('[name="productName"]').type('Test Item');
     cy.get('[name="itemCost"]').type('125.25');
     cy.get('.add-btn').click();
@@ -44,7 +44,7 @@ describe('Add Order', () => {
   });
 
   it('should pop up deactivate modal', () => {
-    cy.get('select').select('ted james');
+    cy.get('select').select('Ted James');
     cy.get('.btn-default').click();
     cy.get('.modal').should('have.css', 'opacity', '1');
   });
